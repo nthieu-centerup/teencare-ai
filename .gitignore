@@ -1,0 +1,39 @@
+# Local environment and secrets (keep example files)
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Python virtual environments and bytecode
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Test, coverage, and tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+junit.xml
+
+# Python build and packaging output
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# IDE and OS metadata
+.idea/
+.vs/
+.DS_Store
+Thumbs.db

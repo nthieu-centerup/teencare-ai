@@ -1,0 +1,11 @@
+{
+  "initial": [
+    { "source": "Parent", "content": "Harry hứa làm bài trước khi chơi game, nhưng lại chơi game hai tiếng trước." },
+    { "source": "Teen", "content": "Em hay trì hoãn nhưng một khi đã bắt đầu thì em thường làm xong." },
+    { "source": "Mentor", "content": "Harry bắt đầu làm bài tốt hơn khi nhiệm vụ được chia thành các bước nhỏ." }
+  ],
+  "followUp": {
+    "source": "Parent",
+    "content": "Sau ba buổi thử chia bài thành bước nhỏ, Harry bắt đầu làm bài trong khoảng năm phút ở hai buổi; một buổi vẫn cần nhắc."
+  }
+}

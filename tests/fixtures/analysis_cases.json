@@ -1,0 +1,166 @@
+[
+  {
+    "name": "single_report",
+    "request": {
+      "jobId": "00000000-0000-4000-8000-000000000900",
+      "teenId": "00000000-0000-4000-8000-000000000901",
+      "inputVersion": 1,
+      "asOfUtc": "2026-09-04T08:00:00Z",
+      "observations": [
+        {
+          "revisionId": "00000000-0000-4000-8000-000000000001",
+          "observationId": "00000000-0000-4000-8000-000000000101",
+          "source": "Parent",
+          "content": "Em chơi game trước khi làm bài trong một buổi học.",
+          "occurredAt": "2026-09-03T10:00:00Z",
+          "recordedAt": "2026-09-04T07:30:00Z"
+        }
+      ]
+    }
+  },
+  {
+    "name": "missing_context",
+    "request": {
+      "jobId": "00000000-0000-4000-8000-000000000900",
+      "teenId": "00000000-0000-4000-8000-000000000901",
+      "inputVersion": 1,
+      "asOfUtc": "2026-09-04T08:00:00Z",
+      "observations": [
+        {
+          "revisionId": "00000000-0000-4000-8000-000000000002",
+          "observationId": "00000000-0000-4000-8000-000000000102",
+          "source": "Teen",
+          "content": "Dạo này em thấy bận.",
+          "occurredAt": null,
+          "recordedAt": "2026-09-04T07:30:00Z"
+        }
+      ]
+    }
+  },
+  {
+    "name": "conflicting_sources",
+    "request": {
+      "jobId": "00000000-0000-4000-8000-000000000900",
+      "teenId": "00000000-0000-4000-8000-000000000901",
+      "inputVersion": 1,
+      "asOfUtc": "2026-09-04T08:00:00Z",
+      "observations": [
+        {
+          "revisionId": "00000000-0000-4000-8000-000000000003",
+          "observationId": "00000000-0000-4000-8000-000000000103",
+          "source": "Parent",
+          "content": "Bài tập tối qua chưa được hoàn thành.",
+          "occurredAt": "2026-09-03T12:00:00Z",
+          "recordedAt": "2026-09-04T07:30:00Z"
+        },
+        {
+          "revisionId": "00000000-0000-4000-8000-000000000004",
+          "observationId": "00000000-0000-4000-8000-000000000104",
+          "source": "Teen",
+          "content": "Em đã hoàn thành bài tập tối qua.",
+          "occurredAt": "2026-09-03T12:00:00Z",
+          "recordedAt": "2026-09-04T07:30:00Z"
+        }
+      ]
+    }
+  },
+  {
+    "name": "invalid_event_times",
+    "request": {
+      "jobId": "00000000-0000-4000-8000-000000000900",
+      "teenId": "00000000-0000-4000-8000-000000000901",
+      "inputVersion": 1,
+      "asOfUtc": "2026-09-04T08:00:00Z",
+      "observations": [
+        {
+          "revisionId": "00000000-0000-4000-8000-000000000001",
+          "observationId": "00000000-0000-4000-8000-000000000101",
+          "source": "Parent",
+          "content": "Em chơi game trước khi làm bài trong một buổi học.",
+          "occurredAt": "2026-09-03T10:00:00Z",
+          "recordedAt": "2026-09-04T07:30:00Z"
+        },
+        {
+          "revisionId": "00000000-0000-4000-8000-000000000005",
+          "observationId": "00000000-0000-4000-8000-000000000105",
+          "source": "Teen",
+          "content": "Em đã bắt đầu làm bài.",
+          "occurredAt": "2026-09-04T13:00:00Z",
+          "recordedAt": "2026-09-04T07:30:00Z"
+        },
+        {
+          "revisionId": "00000000-0000-4000-8000-000000000006",
+          "observationId": "00000000-0000-4000-8000-000000000106",
+          "source": "Mentor",
+          "content": "Em hoàn thành các bước nhỏ.",
+          "occurredAt": "2026-09-05T09:00:00Z",
+          "recordedAt": "2026-09-04T07:30:00Z"
+        }
+      ]
+    }
+  },
+  {
+    "name": "reported_change_after_parent_action",
+    "request": {
+      "jobId": "00000000-0000-4000-8000-000000000900",
+      "teenId": "00000000-0000-4000-8000-000000000901",
+      "inputVersion": 1,
+      "asOfUtc": "2026-09-04T08:00:00Z",
+      "observations": [
+        {
+          "revisionId": "00000000-0000-4000-8000-000000000001",
+          "observationId": "00000000-0000-4000-8000-000000000101",
+          "source": "Parent",
+          "content": "Phụ huynh báo em khó bắt đầu bài tập dù đã thống nhất giờ học.",
+          "occurredAt": "2026-08-29T10:00:00Z",
+          "recordedAt": "2026-09-04T07:30:00Z"
+        },
+        {
+          "revisionId": "00000000-0000-4000-8000-000000000007",
+          "observationId": "00000000-0000-4000-8000-000000000107",
+          "source": "Parent",
+          "content": "Trong ba buổi sau, phụ huynh cùng em chia nhỏ bài tập; hai buổi em bắt đầu sớm hơn, một buổi cần nhắc.",
+          "occurredAt": "2026-09-03T10:00:00Z",
+          "recordedAt": "2026-09-04T07:30:00Z"
+        }
+      ]
+    },
+    "reviewCriteria": [
+      "So sánh hai giai đoạn bằng đúng bằng chứng trước và sau; vẫn quy báo cáo về phụ huynh.",
+      "Có thể ghi nhận tín hiệu tích cực, không kết luận tiến bộ bền vững hoặc quan hệ nhân quả.",
+      "Việc nên thử tiếp theo xét kết quả đã báo cáo và nêu điều cần theo dõi."
+    ]
+  },
+  {
+    "name": "old_success_recorded_later",
+    "request": {
+      "jobId": "00000000-0000-4000-8000-000000000900",
+      "teenId": "00000000-0000-4000-8000-000000000901",
+      "inputVersion": 1,
+      "asOfUtc": "2026-09-04T08:00:00Z",
+      "observations": [
+        {
+          "revisionId": "00000000-0000-4000-8000-000000000001",
+          "observationId": "00000000-0000-4000-8000-000000000101",
+          "source": "Parent",
+          "content": "Phụ huynh báo em khó bắt đầu bài tập dù đã thống nhất giờ học.",
+          "occurredAt": "2026-08-29T10:00:00Z",
+          "recordedAt": "2026-09-04T07:30:00Z"
+        },
+        {
+          "revisionId": "00000000-0000-4000-8000-000000000007",
+          "observationId": "00000000-0000-4000-8000-000000000107",
+          "source": "Parent",
+          "content": "Có một buổi trước đó em tự bắt đầu và hoàn thành bài tập.",
+          "occurredAt": "2026-08-20T10:00:00Z",
+          "recordedAt": "2026-09-04T07:30:00Z"
+        }
+      ]
+    },
+    "reviewCriteria": [
+      "Không coi ghi nhận được nhập sau là sự việc xảy ra sau.",
+      "Không kết luận đã tiến bộ từ một lần thành công cũ; thời điểm sự việc được ưu tiên hơn thứ tự đầu vào.",
+      "Giữ ghi nhận tích cực như bối cảnh, hỏi thêm về các buổi học gần đây khi cần."
+    ]
+  }
+]
