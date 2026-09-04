@@ -66,11 +66,12 @@ def analyze_demo(request: AnalysisRequest) -> AnalysisResponse | None:
         evidence=[evidence(1, Relation.supports, "Teen phân biệt việc khó bắt đầu với khả năng làm tiếp và hoàn thành.")],
     ))
     hypotheses = [Hypothesis(
-        key="task-initiation", dimension=Dimension.self_discipline, status=HypothesisStatus.under_review, confidence=0.0,
-        content="[Mô phỏng] Bước đầu nhỏ và rõ ràng có thể giúp em bắt đầu bài dễ hơn.",
+        key="task-initiation", is_primary=True, dimension=Dimension.self_discipline, status=HypothesisStatus.under_review, confidence=0.0,
+        content="[Mô phỏng] Khó khăn có vẻ tập trung ở bước bắt đầu bài; teen cho biết thường làm xong khi đã bắt đầu.",
         reasoning=("Mentor báo em bắt đầu tốt hơn khi chia nhỏ nhiệm vụ. Cần quan sát xem em có bắt đầu được khi ít hỗ trợ hơn không."
                    if not has_follow_up else "Báo cáo mới của phụ huynh bổ sung tín hiệu cùng hướng với mentor. Cần quan sát thêm khi em tự chọn bước đầu và ít được nhắc hơn."),
-        evidence=[evidence(1, Relation.context, "Teen phân biệt khó bắt đầu với khả năng làm tiếp."),
+        evidence=[evidence(0, Relation.context, "Phụ huynh báo một lần em chưa bắt đầu bài như đã thống nhất."),
+                  evidence(1, Relation.supports, "Teen phân biệt khó bắt đầu với khả năng làm tiếp."),
                   evidence(2, Relation.supports, "Mentor báo một điều kiện em bắt đầu tốt hơn.")]
                  + ([evidence(3, Relation.supports, "Phụ huynh báo kết quả thử ở nhà, còn hạn chế về số buổi.")] if has_follow_up else []),
     )]
@@ -78,15 +79,15 @@ def analyze_demo(request: AnalysisRequest) -> AnalysisResponse | None:
         Recommendation(hypothesis_key="task-initiation", dimension=Dimension.self_discipline, kind=RecommendationKind.support_trial, audience=Audience.parent,
             action=("[Mô phỏng] Trong ba buổi học tới, cùng em chọn một bước bài tập nhỏ để thử trong năm phút."
                     if not has_follow_up else "[Mô phỏng] Cùng em tự chọn bước nhỏ cho ba buổi học tiếp theo và thống nhất lúc em muốn được nhắc."),
-            rationale="Điều chỉnh cách hỗ trợ ở bước bắt đầu, dựa trên điều mentor báo là hữu ích.",
+            rationale="Teen báo khó bắt đầu và mentor thấy chia nhỏ nhiệm vụ có ích: có căn cứ để thử một bước nhỏ. Chưa đủ để kết luận nguyên nhân hoặc bảo đảm cách này sẽ hiệu quả ở nhà.",
             expected_outcome="Ghi lại em bắt đầu thế nào, có cần nhắc không và bước đã chọn có hoàn thành không."),
         Recommendation(hypothesis_key="task-initiation", dimension=Dimension.self_discipline, kind=RecommendationKind.support_trial, audience=Audience.mentor,
             action="[Mô phỏng] Trong buổi gặp tới, cho em tự chọn bước đầu của một bài và quan sát trước khi hỗ trợ.",
-            rationale="Tìm hiểu em cần loại hỗ trợ nào khi bắt đầu, ngoài bối cảnh ở nhà.",
+            rationale="Mentor báo em bắt đầu tốt hơn khi có các bước nhỏ, nên có thể thử giảm gợi ý trong một nhiệm vụ. Chưa biết em sẽ tự bắt đầu thế nào khi ít hỗ trợ hơn.",
             expected_outcome="Em tự bắt đầu được ở bước nào và cần hỗ trợ cụ thể ở đâu?"),
     ]
     return AnalysisResponse(
-        model_version="mock-demo-v3", prompt_version="mock-demo-v3",
+        model_version="mock-demo-v4", prompt_version="mock-demo-v4",
         overview_summary=("[Mô phỏng] Phụ huynh báo em bắt đầu dễ hơn trong hai trong ba buổi thử bước nhỏ. Teen cho biết thường làm xong khi đã bắt đầu; cần theo dõi thêm vì vài buổi chưa chứng minh thay đổi bền vững."
             if has_follow_up else "[Mô phỏng] Phụ huynh và teen báo em gặp khó khi bắt đầu bài; mentor thấy em bắt đầu dễ hơn khi nhiệm vụ được chia nhỏ. Teen cho biết thường làm xong khi đã bắt đầu, nhưng chưa rõ điều này có đúng với các loại bài khác nhau không."),
         change_summary="[Mô phỏng] Tạo mốc đánh giá từ bộ ghi nhận mẫu.",

@@ -25,8 +25,8 @@ def test_demo_recommendations_reference_exact_evidence_and_cover_both_audiences(
     request = demo_request()
     result = analyze_mock(request)
     assert result == analyze_mock(request)
-    assert result.model_version == "mock-demo-v3"
-    assert result.prompt_version == "mock-demo-v3"
+    assert result.model_version == "mock-demo-v4"
+    assert result.prompt_version == "mock-demo-v4"
     assert {r.audience for r in result.recommendations} == {Audience.parent, Audience.mentor}
     assert all(r.hypothesis_key == result.hypotheses[0].key for r in result.recommendations)
     assert all(x.content.startswith("[Mô phỏng]") for x in [*result.assessments, *result.hypotheses])
@@ -47,7 +47,7 @@ def test_later_report_changes_advice_and_cites_both_periods_without_overwriting_
     request.input_changes = AnalysisInputChanges(added_revision_ids=[follow_up.revision_id], updated_previous_revisions=[], removed_revisions=[])
     request.input_version += 1
     second = analyze_mock(request)
-    assert second.model_version == "mock-demo-v3"
+    assert second.model_version == "mock-demo-v4"
     assert second.assessments[0].content != first.assessments[0].content
     assert second.recommendations[0].action != first.recommendations[0].action
     assert {e.observation_revision_id for e in second.assessments[0].evidence} == {

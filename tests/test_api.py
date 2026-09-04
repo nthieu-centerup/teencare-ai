@@ -145,7 +145,7 @@ def test_openai_structured_output_contract_without_paid_call(payload, monkeypatc
     response = client.post("/analyze", json=payload)
     assert response.status_code == 200
     assert response.json()["modelVersion"] == "test-model"
-    assert response.json()["promptVersion"] == "state-v5"
+    assert response.json()["promptVersion"] == "state-v6"
     assert calls[0]["store"] is False
     assert calls[0]["text_format"] is main.ReasoningResult
     assert payload["observations"][0]["revisionId"] in calls[0]["input"]

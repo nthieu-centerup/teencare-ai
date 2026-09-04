@@ -117,6 +117,7 @@ class Assessment(Finding):
 
 
 class Hypothesis(Finding):
+    is_primary: bool | None = Field(default=None, description="Required for new results. Select exactly one non-Rejected working hypothesis most useful to decide the next action; false on alternatives. Null only in legacy state. Do not rank by confidence alone.")
     content: str = Field(min_length=1, max_length=4000, description="One specific tentative explanation in plain Vietnamese; not a restatement of an assessment.")
     reasoning: str = Field(min_length=1, max_length=4000, description="At most two short Vietnamese sentences: the evidence basis, then what to ask or observe to test the explanation.")
     status: HypothesisStatus = Field(description="Current evidence status; Supported does not mean proven.")
@@ -128,7 +129,7 @@ class Recommendation(WireModel):
     hypothesis_key: str | None = Field(description="Optional related hypothesis in the same dimension, not Rejected. Null is valid for direct assessment-based support or information gathering.")
     audience: Audience = Field(description="Person who will carry out the action.")
     action: str = Field(min_length=1, max_length=4000, description="One short, concrete Vietnamese instruction saying what to try and, if useful, for how long.")
-    rationale: str = Field(min_length=1, max_length=4000, description="One short Vietnamese sentence explaining the purpose.")
+    rationale: str = Field(min_length=1, max_length=4000, description="One or two short Vietnamese sentences: which reports justify this specific action, why enough to try or why more information is needed, and what remains uncertain. A different judgment for each action, never a generic confidence score.")
     expected_outcome: str = Field(min_length=1, max_length=4000, description="One short Vietnamese sentence saying what to observe; never promise the action will work.")
 
 
@@ -142,10 +143,10 @@ class ReasoningResult(WireModel):
     change_summary: str = Field(min_length=1, max_length=4000, description="Two or three short Vietnamese sentences: what changed or stayed the same, why, and any adjustment to guidance. No field names or IDs.")
     has_meaningful_changes: bool | None = Field(description="Null without a baseline; otherwise whether understanding, guidance or a material information gap changed. More reports alone do not mean change.")
     change_evidence_revision_ids: list[UUID] = Field(description="Exact current or baseline input revision IDs supporting the update summary. Superseded evidence is only for comparison, not current findings.")
-    assessments: list[Assessment] = Field(max_length=8, description="At most one grounded assessment per dimension. Omit dimensions with no evidence; exclude timestamp repair.")
-    hypotheses: list[Hypothesis] = Field(max_length=16, description="Few useful testable explanations, up to 16 total; do not fill a quota.")
-    information_gaps: list[InformationGap] = Field(max_length=16, description="Useful questions in priority order. The first three are shown in the overview. Empty is valid.")
-    recommendations: list[Recommendation] = Field(max_length=16, description="Useful actions in priority order, at most one per dimension and audience. First three are overview priorities; omit unsupported advice.")
+    assessments: list[Assessment] = Field(description="At most one grounded assessment per dimension. Omit dimensions with no evidence; exclude timestamp repair.")
+    hypotheses: list[Hypothesis] = Field(description="Few useful testable explanations, up to 16 total; do not fill a quota.")
+    information_gaps: list[InformationGap] = Field(description="Useful questions in priority order. The first three are shown in the overview. Empty is valid.")
+    recommendations: list[Recommendation] = Field(description="Actions in priority order. The first relevant action for each audience is shown prominently. Link actions testing the primary hypothesis to its key; do not force advice when evidence is insufficient.")
 
 
 class AnalysisResponse(ReasoningResult):

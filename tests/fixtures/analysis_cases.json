@@ -162,5 +162,89 @@
       "Không kết luận đã tiến bộ từ một lần thành công cũ; thời điểm sự việc được ưu tiên hơn thứ tự đầu vào.",
       "Giữ ghi nhận tích cực như bối cảnh, hỏi thêm về các buổi học gần đây khi cần."
     ]
+  },
+  {
+    "name": "partial_profile",
+    "request": {
+      "jobId": "00000000-0000-4000-8000-000000000900",
+      "teenId": "00000000-0000-4000-8000-000000000901",
+      "inputVersion": 1,
+      "asOfUtc": "2026-09-04T08:00:00Z",
+      "observations": [
+        {
+          "revisionId": "00000000-0000-4000-8000-000000000201",
+          "observationId": "00000000-0000-4000-8001-000000000201",
+          "source": "Mentor",
+          "content": "Trong buổi làm việc nhóm hôm qua, em chia lượt trình bày và hỏi ý kiến bạn ít nói trước khi nhóm quyết định.",
+          "occurredAt": "2026-09-03T10:00:00Z",
+          "recordedAt": "2026-09-04T07:30:00Z"
+        },
+        {
+          "revisionId": "00000000-0000-4000-8000-000000000202",
+          "observationId": "00000000-0000-4000-8001-000000000202",
+          "source": "Teen",
+          "content": "Em thích vẽ truyện và muốn thử tự làm một truyện ngắn, nhưng chưa biết nên bắt đầu từ đâu.",
+          "occurredAt": "2026-09-03T10:00:00Z",
+          "recordedAt": "2026-09-04T07:30:00Z"
+        }
+      ]
+    },
+    "review": "Chỉ nhận định khía cạnh có căn cứ; giữ điểm mạnh hợp tác và sở thích tự báo cáo, không ép đủ tám mục."
+  },
+  {
+    "name": "different_contexts",
+    "request": {
+      "jobId": "00000000-0000-4000-8000-000000000900",
+      "teenId": "00000000-0000-4000-8000-000000000901",
+      "inputVersion": 1,
+      "asOfUtc": "2026-09-04T08:00:00Z",
+      "observations": [
+        {
+          "revisionId": "00000000-0000-4000-8000-000000000211",
+          "observationId": "00000000-0000-4000-8001-000000000211",
+          "source": "Parent",
+          "content": "Trong hai lần nhắc chuyện bài tập tại bữa tối tuần này, con lớn tiếng rồi vào phòng.",
+          "occurredAt": "2026-09-03T10:00:00Z",
+          "recordedAt": "2026-09-04T07:30:00Z"
+        },
+        {
+          "revisionId": "00000000-0000-4000-8000-000000000212",
+          "observationId": "00000000-0000-4000-8001-000000000212",
+          "source": "Mentor",
+          "content": "Trong buổi nhóm hôm qua, khi bạn phản đối ý tưởng, em hỏi lý do và bình tĩnh đổi cách làm.",
+          "occurredAt": "2026-09-03T10:00:00Z",
+          "recordedAt": "2026-09-04T07:30:00Z"
+        },
+        {
+          "revisionId": "00000000-0000-4000-8000-000000000213",
+          "observationId": "00000000-0000-4000-8001-000000000213",
+          "source": "Teen",
+          "content": "Khi cả nhà nói về bài tập trước mặt em gái, em thấy xấu hổ; ở nhóm bạn em dễ nói chuyện hơn.",
+          "occurredAt": "2026-09-03T10:00:00Z",
+          "recordedAt": "2026-09-04T07:30:00Z"
+        }
+      ]
+    },
+    "review": "Giữ khác biệt bối cảnh và lời tự báo cáo, không gắn nhãn mất kiểm soát hoặc xem nguồn mới nhất là đúng tuyệt đối. Lần đầu trend Unknown."
+  },
+  {
+    "name": "unclear_support_basis",
+    "request": {
+      "jobId": "00000000-0000-4000-8000-000000000900",
+      "teenId": "00000000-0000-4000-8000-000000000901",
+      "inputVersion": 1,
+      "asOfUtc": "2026-09-04T08:00:00Z",
+      "observations": [
+        {
+          "revisionId": "00000000-0000-4000-8000-000000000221",
+          "observationId": "00000000-0000-4000-8001-000000000221",
+          "source": "Parent",
+          "content": "Dạo này con có vẻ khác nhưng tôi chưa nhớ được tình huống cụ thể nào.",
+          "occurredAt": "2026-09-03T10:00:00Z",
+          "recordedAt": "2026-09-04T07:30:00Z"
+        }
+      ]
+    },
+    "review": "Không kết luận khía cạnh hay kê cách hỗ trợ hành vi từ cảm giác chung; ưu tiên hỏi tình huống cụ thể. Không gọi thiếu dữ liệu là điểm yếu của con."
   }
 ]

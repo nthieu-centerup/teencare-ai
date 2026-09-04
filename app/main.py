@@ -14,13 +14,16 @@ load_dotenv(Path(__file__).resolve().parent.parent / ".env", override=False)
 
 app = FastAPI(title="TeenCare AI", version="1.0.0")
 logger = logging.getLogger("teencare.ai")
-PROMPT_VERSION = "state-v5"
+PROMPT_VERSION = "state-v6"
 PROMPT = (Path(__file__).parent / "prompts" / f"{PROMPT_VERSION}.txt").read_text(encoding="utf-8")
 
 
 def validate_references(request: AnalysisRequest, result: ReasoningResult) -> None:
     if not result.overview_summary or not result.overview_summary.strip():
         raise HTTPException(422, "INVALID_AI_OVERVIEW")
+    if (len(result.assessments) > 8 or len(result.hypotheses) > 16
+            or len(result.recommendations) > 16 or len(result.information_gaps) > 16):
+        raise HTTPException(422, "INVALID_AI_RESULT_SIZE")
     dimensions = {item.dimension for item in result.assessments}
     if len(dimensions) != len(result.assessments):
         raise HTTPException(422, "INVALID_AI_DIMENSIONS")
@@ -40,6 +43,9 @@ def validate_references(request: AnalysisRequest, result: ReasoningResult) -> No
     keys = {item.key for item in result.hypotheses}
     if len(keys) != len(result.hypotheses) or len({a.key for a in result.assessments}) != len(result.assessments):
         raise HTTPException(422, "INVALID_AI_KEYS")
+    if (any(h.is_primary is None or (h.is_primary and h.status == HypothesisStatus.rejected) for h in result.hypotheses)
+            or sum(h.is_primary is True for h in result.hypotheses) != int(any(h.status != HypothesisStatus.rejected for h in result.hypotheses))):
+        raise HTTPException(422, "INVALID_AI_PRIMARY_HYPOTHESIS")
     for item in [*result.assessments, *result.hypotheses]:
         if item.dimension is None:
             raise HTTPException(422, "INVALID_AI_DIMENSIONS")
